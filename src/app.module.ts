@@ -4,11 +4,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
+import * as dotenv from 'dotenv';
+
+dotenv.config({ path: process.cwd() + '/.env' });
 
 @Module({
   imports: [
     ProductsModule, 
-    MongooseModule.forRoot('mongodb+srv://jonathanhayot:vI4qBM9W5A8G3eqr@nest.ahvwnmk.mongodb.net/?retryWrites=true&w=majority&appName=Nest')
+    MongooseModule.forRoot(process.env.DATABASE)
   ],
   controllers: [AppController],
   providers: [AppService],
